@@ -1,5 +1,3 @@
-
-
 name: Build Android Project
 
 on:
@@ -22,8 +20,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Fix gradlew permission
-        run: chmod +x ./gradlew
+      - name: Fix permissions for Gradle Wrapper
+        run: |
+          chmod +x ./gradlew
+          chmod +x ./gradle/wrapper/gradle-wrapper.jar
 
       - name: Verify Gradle Version
         run: ./gradlew --version
@@ -34,8 +34,3 @@ jobs:
         run: ./gradlew build
         env:
           JAVA_HOME: ${{ env.JAVA_HOME }}
-
-name: Fix permissions for Gradle Wrapper
-     run: |
-       chmod +x ./gradlew
-       chmod +x ./gradle/wrapper/gradle-wrapper.jar
