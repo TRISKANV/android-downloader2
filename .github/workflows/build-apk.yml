@@ -1,3 +1,6 @@
+gradlew: - name: Set permissions for gradlew
+     run: chmod +x ./gradlew
+
 name: Build Android Project
 
 on:
