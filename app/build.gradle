@@ -1,6 +1,6 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android' // si usas Kotlin
+    id 'kotlin-android'
 }
 
 android {
