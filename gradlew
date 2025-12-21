@@ -1,32 +1,9 @@
 #!/usr/bin/env sh
-   #
-   # Copyright 2018 the original author or authors.
-   #
-   # Licensed under the Apache License, Version 2.0 (the "License");
-   # you may not use this file except in compliance with the License.
-   # You may obtain a copy of the License at
-   #
-   #      http://www.apache.org/licenses/LICENSE-2.0
-   #
-   # Unless required by applicable law or agreed to in writing, software
-   # distributed under the License is distributed on an "AS IS" BASIS,
-   # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   # See the License for the specific language governing permissions and
-   # limitations under the License.
-   #
 
-   set -e
+# Gradle start up script for POSIX systems
 
-   # Determine absolute path of base directory.
-   BASE_DIR=$(cd "`dirname "$0"`" && pwd)
+APP_HOME="$(cd "$(dirname "$0")" && pwd)"
 
-   # Load the JVM_VERSION_REQUIRED variable
-   if [ -r "$BASE_DIR/gradle/wrapper/gradle-wrapper.properties" ]; then
-       JVM_VERSION_REQUIRED=`grep "distributionUrl" "$BASE_DIR/gradle/wrapper/gradle-wrapper.properties" | sed -E 's/.*gradle-(.*)-bin.zip/\1/'`
-   fi
+CLASSPATH="$APP_HOME/gradle/wrapper/gradle-wrapper.jar"
 
-   if [ -z "$JVM_VERSION_REQUIRED" ]; then
-       JVM_VERSION_REQUIRED=11
-   fi
-
-   exec "$BASE_DIR/gradle/wrapper/gradle-wrapper.jar" "$@"
+exec java -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
