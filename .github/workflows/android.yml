@@ -1,0 +1,2 @@
+- name: Permisos gradlew
+  run: chmod +x gradlew
