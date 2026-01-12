@@ -13,11 +13,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-
-      - name: Reparar repositorios de Plugins
-        run: |
-          echo "pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }" > settings.gradle
-          echo "dependencyResolutionManagement { repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS); repositories { google(); mavenCentral() } }" >> settings.gradle
+          cache: gradle
 
       - name: Instalar Gradle 8.0
         run: |
@@ -26,7 +22,7 @@ jobs:
           echo "/opt/gradle/gradle-8.0/bin" >> $GITHUB_PATH
 
       - name: Compilar con Gradle 8.0
-        run: gradle assembleDebug --stacktrace
+        run: gradle assembleDebug
 
       - name: Subir el APK generado
         uses: actions/upload-artifact@v4
