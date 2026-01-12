@@ -1,3 +1,4 @@
+
 name: Compilar APK
 on: [push, workflow_dispatch]
 
@@ -15,8 +16,15 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Compilar con Gradle preinstalado
-        run: gradle assembleDebug
+      - name: Instalar Gradle específico
+        run: |
+          wget https://services.gradle.org/distributions/gradle-8.0-bin.zip
+          sudo unzip -d /opt/gradle gradle-8.0-bin.zip
+          export PATH=$PATH:/opt/gradle/gradle-8.0/bin
+          gradle -v
+
+      - name: Compilar con Gradle 8.0
+        run: /opt/gradle/gradle-8.0/bin/gradle assembleDebug
 
       - name: Subir el APK generado
         uses: actions/upload-artifact@v4
