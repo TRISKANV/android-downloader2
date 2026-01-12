@@ -15,11 +15,8 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Dar permisos a Gradle
-        run: chmod +x gradlew
-
-      - name: Compilar con Gradle
-        run: ./gradlew assembleDebug
+      - name: Compilar con Gradle preinstalado
+        run: gradle assembleDebug
 
       - name: Subir el APK generado
         uses: actions/upload-artifact@v4
