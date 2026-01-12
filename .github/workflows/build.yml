@@ -13,6 +13,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: gradle
 
       - name: Instalar Gradle 8.0
         run: |
@@ -22,11 +23,3 @@ jobs:
 
       - name: Compilar con Gradle 8.0
         run: gradle assembleDebug
-        env:
-          JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
-
-      - name: Subir el APK generado
-        uses: actions/upload-artifact@v4
-        with:
-          name: App-Descargada
-          path: app/build/outputs/apk/debug/*.apk
