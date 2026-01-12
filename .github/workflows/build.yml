@@ -13,7 +13,25 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
+
+      - name: Crear mapa de repositorios (Init Script)
+        run: |
+          mkdir -p ~/.gradle
+          echo "settingsEvaluated { settings ->
+            settings.pluginManagement {
+              repositories {
+                google()
+                mavenCentral()
+                gradlePluginPortal()
+              }
+            }
+            settings.dependencyResolutionManagement {
+              repositories {
+                google()
+                mavenCentral()
+              }
+            }
+          }" > ~/.gradle/init.gradle
 
       - name: Instalar Gradle 8.0
         run: |
