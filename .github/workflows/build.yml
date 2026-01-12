@@ -1,4 +1,3 @@
-
 name: Compilar APK
 on: [push, workflow_dispatch]
 
@@ -14,17 +13,20 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
 
-      - name: Instalar Gradle específico
+      - name: Reparar repositorios de Plugins
+        run: |
+          echo "pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }" > settings.gradle
+          echo "dependencyResolutionManagement { repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS); repositories { google(); mavenCentral() } }" >> settings.gradle
+
+      - name: Instalar Gradle 8.0
         run: |
           wget https://services.gradle.org/distributions/gradle-8.0-bin.zip
           sudo unzip -d /opt/gradle gradle-8.0-bin.zip
-          export PATH=$PATH:/opt/gradle/gradle-8.0/bin
-          gradle -v
+          echo "/opt/gradle/gradle-8.0/bin" >> $GITHUB_PATH
 
       - name: Compilar con Gradle 8.0
-        run: /opt/gradle/gradle-8.0/bin/gradle assembleDebug
+        run: gradle assembleDebug --stacktrace
 
       - name: Subir el APK generado
         uses: actions/upload-artifact@v4
