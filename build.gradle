@@ -9,10 +9,4 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
-    }
-}
+// Eliminamos el bloque allprojects de aquí para que no haya conflictos
