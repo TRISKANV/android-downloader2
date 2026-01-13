@@ -13,8 +13,6 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
-        
-        // Esto ayuda a que las librerías viejas no rompan el build
         multiDexEnabled true
     }
 
@@ -28,14 +26,17 @@ android {
     }
 }
 
+// ESTO ES LO NUEVO: Fuerza a Gradle a eliminar spotbugs de todo el proyecto
+configurations.all {
+    exclude group: 'com.github.spotbugs', module: 'spotbugs-annotations'
+}
+
 dependencies {
-    // Intentamos con la versión exacta que suele estar disponible en JitPack
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.24.4'
+    // Ya vimos que con 'v' o sin 'v' funciona, usemos la estándar
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:0.24.4'
     
     implementation "androidx.core:core-ktx:1.12.0"
     implementation "androidx.appcompat:appcompat:1.6.1"
     implementation "com.google.android.material:material:1.11.0"
-    
-    // Agregamos multidex por si la librería es muy pesada
     implementation "androidx.multidex:multidex:2.0.1"
 }
