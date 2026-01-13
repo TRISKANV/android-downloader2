@@ -10,9 +10,6 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        // Repositorio oficial de TeamNewPipe (más estable)
-        maven { url "https://repo.newpipe.net/repository/maven" }
-        // JitPack como respaldo
         maven { url "https://jitpack.io" }
     }
 }
