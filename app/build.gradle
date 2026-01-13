@@ -26,13 +26,13 @@ android {
     }
 }
 
-// ESTO ES LO NUEVO: Fuerza a Gradle a eliminar spotbugs de todo el proyecto
+// Bloqueo total al error de spotbugs que vimos antes
 configurations.all {
     exclude group: 'com.github.spotbugs', module: 'spotbugs-annotations'
 }
 
 dependencies {
-    // Ya vimos que con 'v' o sin 'v' funciona, usemos la estándar
+    // Probamos con la 0.24.4 o 0.24.0 que son muy estables en su repo oficial
     implementation 'com.github.TeamNewPipe:NewPipeExtractor:0.24.4'
     
     implementation "androidx.core:core-ktx:1.12.0"
