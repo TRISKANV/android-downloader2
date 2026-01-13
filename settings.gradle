@@ -11,12 +11,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { 
-            url "https://jitpack.io"
-            // Forzamos a que busque el contenido directamente
-            metadataSources {
-                mavenPom()
-                artifact()
-            }
+            url "https://jitpack.io" 
+            // Esto evita que Gradle verifique licencias externas y solo baje el archivo
+            allowInsecureProtocol = false 
         }
     }
 }
