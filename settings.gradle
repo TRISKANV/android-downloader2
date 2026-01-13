@@ -1,15 +1,17 @@
-// Este archivo queda vacío o con este bloque para que no choque con settings.gradle
-buildscript {
+pluginManagement {
     repositories {
         google()
         mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.0.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10"
+        gradlePluginPortal()
     }
 }
-
-allprojects {
-    // No agregar repositorios aquí, ya están en settings.gradle
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
 }
+rootProject.name = "android-downloader2"
+include ':app'
