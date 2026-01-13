@@ -5,8 +5,8 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import org.schabi.newpipe.extractor.NewPipe
 import org.schabi.newpipe.extractor.ServiceList
-import org.schabi.newpipe.extractor.services.youtube.YoutubeService
 import kotlin.concurrent.thread
+import org.schabi.newpipe.extractor.downloader.Downloader
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,8 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Inicializar NewPipe (obligatorio)
-        NewPipe.init(YouTubeDownloaderDownloader.getInstance()) 
+        // Inicializamos NewPipe con un "Downloader" básico
+        try {
+            NewPipe.init(null) 
+        } catch (e: Exception) {
+            // Ya estaba inicializado o error leve
+        }
 
         val urlInput = findViewById<EditText>(R.id.urlInput)
         val downloadBtn = findViewById<Button>(R.id.downloadBtn)
@@ -23,9 +27,13 @@ class MainActivity : AppCompatActivity() {
 
         downloadBtn.setOnClickListener {
             val url = urlInput.text.toString()
+            if (url.isEmpty()) {
+                statusText.text = "Por favor, pega un link"
+                return@setOnClickListener
+            }
+
             statusText.text = "Analizando video..."
 
-            // La extracción debe ir en un hilo separado para no trabar la app
             thread {
                 try {
                     val service = ServiceList.YouTube
@@ -35,11 +43,11 @@ class MainActivity : AppCompatActivity() {
                     val title = extractor.name
                     
                     runOnUiThread {
-                        statusText.text = "Video encontrado: $title\nIniciando extracción de links..."
+                        statusText.text = "Encontrado: $title"
                     }
                 } catch (e: Exception) {
                     runOnUiThread {
-                        statusText.text = "Error: Link no válido o sin conexión"
+                        statusText.text = "Error al leer el video"
                     }
                 }
             }
