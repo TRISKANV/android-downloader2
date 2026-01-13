@@ -1,39 +1,6 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-}
-
-android {
-    namespace "com.example.downloader"
-    compileSdk 34
-
-    defaultConfig {
-        applicationId "com.example.downloader"
-        minSdk 21
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
-        multiDexEnabled true
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = '17'
-    }
-}
-
-// Bloqueo de seguridad para que no falle el compilador
-configurations.all {
-    exclude group: 'com.github.spotbugs', module: 'spotbugs-annotations'
-}
-
 dependencies {
-    // Cambiamos a la 0.24.0 que es más probable que JitPack sirva rápido
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:0.24.0'
+    // Usamos el ID del commit exacto de la versión 0.24.0 para forzar la descarga
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:6760596395'
     
     implementation "androidx.core:core-ktx:1.12.0"
     implementation "androidx.appcompat:appcompat:1.6.1"
