@@ -1,16 +1,19 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
         mavenCentral()
-        maven { 
-            url "https://jitpack.io"
-            // Esto obliga a buscar aunque parezca que no existe
-            metadataSources {
-                mavenPom()
-                artifact()
-            }
-        }
+        // Repositorio oficial de TeamNewPipe (más estable)
+        maven { url "https://repo.newpipe.net/repository/maven" }
+        // JitPack como respaldo
+        maven { url "https://jitpack.io" }
     }
 }
 rootProject.name = "android-downloader2"
