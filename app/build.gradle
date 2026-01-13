@@ -26,14 +26,14 @@ android {
     }
 }
 
-// Bloqueo de seguridad para evitar el error de spotbugs que vimos antes
+// Bloqueo total al error de spotbugs que vimos antes
 configurations.all {
     exclude group: 'com.github.spotbugs', module: 'spotbugs-annotations'
 }
 
 dependencies {
-    // El bloque que faltaba. Usamos el commit hash directo para que JitPack no falle.
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:6760596395'
+    // Esta versión (v0.24.0) es la más estable y descargada en JitPack
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.24.0'
     
     implementation "androidx.core:core-ktx:1.12.0"
     implementation "androidx.appcompat:appcompat:1.6.1"
