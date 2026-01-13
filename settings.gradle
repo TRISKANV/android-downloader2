@@ -6,18 +6,11 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    // Cambiamos a PREFER_SETTINGS y forzamos los repositorios aquí
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
         mavenCentral()
-        // Agregamos JitPack de forma completa
-        maven { 
-            url 'https://jitpack.io' 
-            content {
-                includeGroup "com.github.TeamNewPipe"
-            }
-        }
+        maven { url "https://jitpack.io" } 
     }
 }
 rootProject.name = "android-downloader2"
